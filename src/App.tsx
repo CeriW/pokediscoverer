@@ -1,50 +1,83 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+type Pokemon = {
+  name: string;
+  id: string;
+  sprites: {
+    other: {
+      'official-artwork': {
+        front_default: string;
+      };
+    };
+  };
+};
+
+const emptyPokemon: Pokemon = {
+  name: '',
+  id: '',
+  sprites: {
+    other: {
+      'official-artwork': {
+        front_default: '',
+      },
+    },
+  },
+};
+
 interface PokemonContextValue {
-  pokemon: { name: string };
+  pokemon: Pokemon | null;
   updatePokemonName: () => Promise<void>;
 }
 
 const PokemonContext = createContext<PokemonContextValue>({
-  pokemon: { name: '' },
+  pokemon: null,
   updatePokemonName: async () => {},
 });
 
-const PokemonCard = () => {
-  const pokemon = useContext<PokemonContextValue>(PokemonContext);
+const updatePokemon = async () => {
+  const randomNumber = Math.floor(Math.random() * 1010);
+  try {
+    const apiUrl = `https://pokeapi.co/api/v2/pokemon/${randomNumber}`;
+    const response = await fetch(apiUrl);
 
-  return <div>Hello {pokemon.pokemon.name}</div>;
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    return { name: '' }; // Return an empty object in case of an error
+  }
 };
 
 const PokemonProvider = ({ children }: { children: React.ReactNode }) => {
-  const [pokemon, setPokemon] = useState({ name: '' });
+  const [pokemon, setPokemon] = useState(emptyPokemon);
 
-  const randomNumber = Math.floor(Math.random() * 1010);
-
-  const updatePokemon = async () => {
-    try {
-      const apiUrl = `https://pokeapi.co/api/v2/pokemon/${randomNumber}`;
-      const response = await fetch(apiUrl);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setPokemon({ name: data.name });
-    } catch (error) {
-      console.error('Error:', error);
-    }
+  const updatePokemonName = async () => {
+    const newPokemon = await updatePokemon();
+    setPokemon(newPokemon);
   };
 
   useEffect(() => {
-    updatePokemon();
+    updatePokemonName();
   }, []);
 
+  return <PokemonContext.Provider value={{ pokemon, updatePokemonName }}>{children}</PokemonContext.Provider>;
+};
+
+const PokemonCard = () => {
+  const { pokemon } = useContext<PokemonContextValue>(PokemonContext);
+
   return (
-    <PokemonContext.Provider value={{ pokemon, updatePokemonName: updatePokemon }}>{children}</PokemonContext.Provider>
+    <div>
+      <h2>{pokemon?.name}</h2>
+      <div>#{pokemon?.id}</div>
+      <img className="pokemon-img" src={pokemon?.sprites.other['official-artwork']['front_default']} alt="" />
+    </div>
   );
 };
 
@@ -53,15 +86,13 @@ function App() {
     <PokemonProvider>
       <div className="App">
         <PokemonCard />
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-            Learn React
-          </a>
-        </header>
+        <PokemonContext.Consumer>
+          {(pokemonContext) => (
+            <button id="new-pokemon-button" onClick={() => pokemonContext.updatePokemonName()}>
+              Click me
+            </button>
+          )}
+        </PokemonContext.Consumer>
       </div>
     </PokemonProvider>
   );
