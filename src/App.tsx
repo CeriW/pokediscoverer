@@ -3,29 +3,15 @@ import './App.css';
 import getRandomPokemon from './getRandomPokemon';
 import getHeldItem from './getHeldItem';
 import samplePokemon from './sample-pokemon.json';
+import { Pokemon } from './types';
 
-export type Pokemon = {
-  name: string;
-  id: number;
-  sprites: {
-    other: {
-      'official-artwork': {
-        front_default: string;
-        front_shiny: string;
-      };
-    };
-  };
-  types: PokemonTypeList;
-  stats: PokemonBaseStats;
-  held_items: PokemonHeldItem[];
-  [key: string]: any;
-};
-
-type PokemonBaseStats = { base_stat: number; stat: { name: string } }[];
-type PokemonTypeList = { type: { name: string } }[];
-export type PokemonHeldItem = { item: { name: string; url: string } };
+const wikiLink = (url: string) => `https://bulbapedia.bulbagarden.net/wiki/${url}`;
 
 const HeldItemsList = ({ list }) => {
+  if (list.length === 0) {
+    return;
+  }
+
   const myList = list.map((item, index) => {
     const wikiName = item.name.replace(/-(.)/g, function (match, capturedCharacter) {
       const upperCaseCharacter = capturedCharacter.toUpperCase();
@@ -40,15 +26,22 @@ const HeldItemsList = ({ list }) => {
     );
   });
 
-  return <div>{myList}</div>;
+  return (
+    <div>
+      <h3>Held items</h3>
+      {myList}
+    </div>
+  );
 };
 
 const TypeList = ({ list }) => {
   const myList = list.map((item, index) => {
+    const linkHref = `${wikiLink(item.type.name)}_(type)`;
+
     return (
-      <li key={index} className={item.type.name}>
+      <a href={linkHref} target="_blank" key={index} className={item.type.name} rel="noreferrer">
         {item.type.name}
-      </li>
+      </a>
     );
   });
 
@@ -65,8 +58,36 @@ const BaseStatList = ({ list }) => {
     );
   });
 
-  return <div>{myList}</div>;
+  return (
+    <div>
+      <h3>Base stats</h3>
+      {myList}
+    </div>
+  );
 };
+
+const WeightList = ({ hectograms }) => {
+  const kg = hectograms / 10;
+  const lbs = (hectograms * 0.22046226).toFixed(1);
+
+  return (
+    <div>
+      Weight: {kg} kg ({lbs} lbs)
+    </div>
+  );
+};
+
+const HeightList = ({ decimeters }) => {
+  const cm = decimeters * 10;
+  const inches = Math.ceil(decimeters * 3.93700787);
+
+  return (
+    <div>
+      Height: {cm} cm ({inches} inches)
+    </div>
+  );
+};
+
 export default function App() {
   // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemon, setPokemon] = useState<Pokemon | null>(samplePokemon);
@@ -108,8 +129,10 @@ export default function App() {
           <HeldItemsList list={heldItems} />
           <TypeList list={pokemon.types} />
           <BaseStatList list={pokemon.stats} />
-          <div className="pokemon-name">{pokemon.name}</div>
+          <h2 className="pokemon-name">{pokemon.name}</h2>
           <div className="pokemon-id">#{pokemon.id}</div>
+          <WeightList hectograms={pokemon.weight} />
+          <HeightList decimeters={pokemon.height} />
           <div className="pokemon-sprites">
             <img src={pokemon.sprites.other['official-artwork']['front_default']} alt="" />
             <img src={pokemon.sprites.other['official-artwork']['front_shiny']} alt="" />

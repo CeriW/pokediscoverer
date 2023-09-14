@@ -1,4 +1,4 @@
-import { Pokemon } from './App';
+import { Pokemon } from './types';
 import samplePokemon from './sample-pokemon.json';
 
 const getRandomPokemon = (): Promise<Pokemon> => {
