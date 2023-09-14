@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import getRandomPokemon from './getRandomPokemon';
+import getHeldItem from './getHeldItem';
 import samplePokemon from './sample-pokemon.json';
 
 export type Pokemon = {
@@ -16,11 +17,17 @@ export type Pokemon = {
   };
   types: PokemonTypeList;
   stats: PokemonBaseStats;
+  held_items: PokemonHeldItem[];
   [key: string]: any;
 };
 
 type PokemonBaseStats = { base_stat: number; stat: { name: string } }[];
 type PokemonTypeList = { type: { name: string } }[];
+export type PokemonHeldItem = { item: { name: string; url: string } };
+
+const HeldItemList = () => {
+  return <div></div>;
+};
 
 const TypeList: React.FC<{ list: PokemonTypeList }> = ({ list }) => {
   const myList = list.map((item, index) => {
@@ -46,11 +53,10 @@ const BaseStatList: React.FC<{ list: PokemonBaseStats }> = ({ list }) => {
 
   return <div>{myList}</div>;
 };
-
 export default function App() {
   // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemon, setPokemon] = useState<Pokemon | null>(samplePokemon);
-
+  const [heldItems, setHeldItems] = useState<{ name: string; sprite: string }[]>([]);
   const fetchNewRandomPokemon = async () => {
     try {
       const newPokemon = await getRandomPokemon();
@@ -60,6 +66,26 @@ export default function App() {
       console.error('Error:', error);
     }
   };
+
+  const updateHeldItems = async () => {};
+
+  useEffect(() => {
+    if (pokemon) {
+      const newHeldItemsPromises = pokemon.held_items.map(async (item) => {
+        const itemInfo = await getHeldItem(item.item.url);
+        return itemInfo;
+      });
+
+      Promise.all(newHeldItemsPromises)
+        .then((resolvedHeldItems) => {
+          console.log(resolvedHeldItems);
+          setHeldItems(resolvedHeldItems);
+        })
+        .catch((error) => {
+          console.error('Error fetching held items:', error);
+        });
+    }
+  }, [pokemon]);
 
   return (
     <div>
