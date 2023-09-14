@@ -2,7 +2,7 @@ import { Pokemon } from './App';
 import samplePokemon from './sample-pokemon.json';
 
 const getRandomPokemon = (): Promise<Pokemon> => {
-  const randomNumber = Math.floor(Math.random() * 1010);
+  const randomNumber = Math.ceil(Math.random() * 1010);
   const apiUrl = `https://pokeapi.co/api/v2/pokemon/${randomNumber}`;
 
   return fetch(apiUrl)

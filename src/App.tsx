@@ -25,11 +25,25 @@ type PokemonBaseStats = { base_stat: number; stat: { name: string } }[];
 type PokemonTypeList = { type: { name: string } }[];
 export type PokemonHeldItem = { item: { name: string; url: string } };
 
-const HeldItemList = () => {
-  return <div></div>;
+const HeldItemsList = ({ list }) => {
+  const myList = list.map((item, index) => {
+    const wikiName = item.name.replace(/-(.)/g, function (match, capturedCharacter) {
+      const upperCaseCharacter = capturedCharacter.toUpperCase();
+      return `_${upperCaseCharacter}`;
+    });
+
+    return (
+      <a key={index} href={`https://bulbapedia.bulbagarden.net/wiki/${wikiName}`} target="_blank" rel="noreferrer">
+        <img src={item.sprite} alt={`${item.name} sprite`} />
+        {item.name}
+      </a>
+    );
+  });
+
+  return <div>{myList}</div>;
 };
 
-const TypeList: React.FC<{ list: PokemonTypeList }> = ({ list }) => {
+const TypeList = ({ list }) => {
   const myList = list.map((item, index) => {
     return (
       <li key={index} className={item.type.name}>
@@ -41,7 +55,7 @@ const TypeList: React.FC<{ list: PokemonTypeList }> = ({ list }) => {
   return <div>{myList}</div>;
 };
 
-const BaseStatList: React.FC<{ list: PokemonBaseStats }> = ({ list }) => {
+const BaseStatList = ({ list }) => {
   const myList = list.map((item, index) => {
     return (
       <div key={index}>
@@ -57,6 +71,7 @@ export default function App() {
   // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemon, setPokemon] = useState<Pokemon | null>(samplePokemon);
   const [heldItems, setHeldItems] = useState<{ name: string; sprite: string }[]>([]);
+
   const fetchNewRandomPokemon = async () => {
     try {
       const newPokemon = await getRandomPokemon();
@@ -66,8 +81,6 @@ export default function App() {
       console.error('Error:', error);
     }
   };
-
-  const updateHeldItems = async () => {};
 
   useEffect(() => {
     if (pokemon) {
@@ -92,6 +105,7 @@ export default function App() {
       <button onClick={fetchNewRandomPokemon}>Click me</button>
       {pokemon ? (
         <div>
+          <HeldItemsList list={heldItems} />
           <TypeList list={pokemon.types} />
           <BaseStatList list={pokemon.stats} />
           <div className="pokemon-name">{pokemon.name}</div>
