@@ -224,7 +224,7 @@ export default function App() {
   const [heldItems, setHeldItems] = useState<{ name: string; sprite: string }[]>([]);
 
   const date = new Date();
-  const pokemonOfTheDayId = date.getDay() * date.getDate() * Math.ceil(date.getMonth() / 2);
+  const pokemonOfTheDayId = date.getDay() * date.getDate() * Math.ceil(date.getMonth() / 3);
   const [pokemonOfTheDay] = useState(pokemonOfTheDayId);
 
   const fetchNewRandomPokemon = async () => {
