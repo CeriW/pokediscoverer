@@ -10,6 +10,8 @@ $fontweight-bold: 700;
 
 $fontsize-large: 1.25em;
 
+$radius-small: 5px;
+
 $types: (
   normal: #a8a77a,
   fire: #ee8130,
@@ -51,19 +53,25 @@ h3 {
   margin-bottom: $spacing-small;
 }
 
-body {
+#app {
   background: $blue;
   font-family: Inter, sans-serif;
   display: flex;
+  align-items: center;
   justify-content: center;
+  flex-direction: column;
   padding: $spacing-default;
   font-size: 16px;
   font-weight: 300;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 .pokemon-card {
   background: $yellow;
-  width: 800px;
+  // width: 800px;
   max-width: 100%;
   padding: $spacing-default;
   border-radius: 10px;
@@ -89,9 +97,13 @@ body {
   gap: $spacing-large;
   box-shadow: 0 0 5px rgba(black, 0.7) inset;
 
-  & > div > div {
+  & > div > div:not(.held-items-list) {
     margin-bottom: $spacing-large;
   }
+}
+
+.pokemon-text {
+  width: 300px;
 }
 
 .type-list {
@@ -99,7 +111,7 @@ body {
 
   a {
     padding: $spacing-small $spacing-default;
-    border-radius: 5px;
+    border-radius: $radius-small;
     color: #000;
     text-transform: uppercase;
     font-weight: $fontweight-bold;
@@ -113,6 +125,10 @@ body {
       // Add any other CSS rules you want here
     }
   }
+}
+
+.held-items-container {
+  min-height: 125px;
 }
 
 .held-items-list {
@@ -162,5 +178,35 @@ body {
 
   .hp {
     text-transform: uppercase;
+  }
+}
+
+.sprite-list {
+  width: 216px;
+
+  .different-gender-sprite-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  figure {
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    margin: 0;
+    margin: $spacing-small;
+    border-radius: $radius-small;
+  }
+
+  figcaption {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    font-size: small;
+    padding: 3px;
   }
 }

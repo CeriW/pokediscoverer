@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
-import getRandomPokemon from './getRandomPokemon';
+import getNewPokemon from './getRandomPokemon';
 import getHeldItem from './getHeldItem';
 import samplePokemon from './sample-pokemon.json';
 import { Pokemon } from './types';
@@ -97,7 +97,6 @@ const HeightList = ({ decimeters }) => {
 
 const GenerationDisplay = ({ id }) => {
   const calculateGeneration = (id: number): string | undefined => {
-    console.log(id);
     if (id <= 151) {
       return 'Red/Blue (gen 1)';
     }
@@ -139,15 +138,109 @@ const GenerationDisplay = ({ id }) => {
   );
 };
 
+const SpriteList = ({ spriteList }) => {
+  const differentGenders = spriteList.front_female as Boolean;
+
+  const MixedGenderSprites = () => {
+    return (
+      <div className="different-gender-sprite-list">
+        <figure>
+          <img src={spriteList.front_default} alt="male sprite" width="96" height="96" />
+          <figcaption>
+            <span>&nbsp;</span>
+            <img src="icons/male.svg" alt="male" width="25" />
+          </figcaption>
+        </figure>
+        <figure>
+          <img src={spriteList.front_female} alt="female sprite" width="96" height="96" />
+          <figcaption>
+            <span></span>
+            <img src="icons/female.svg" alt="female" width="25" />
+          </figcaption>
+        </figure>
+        <figure>
+          {spriteList.front_shiny && (
+            <div>
+              <img src={spriteList.front_shiny} alt="male shiny sprite" width="96" height="96" />
+              <figcaption>
+                shiny <img src="icons/male.svg" alt="male" width="25" />
+              </figcaption>
+            </div>
+          )}
+        </figure>
+        <figure>
+          {spriteList.front_shiny_female && (
+            <div>
+              <img src={spriteList.front_shiny_female} alt="female shiny sprite" width="96" height="96" />
+              <figcaption>
+                shiny <img src="icons/female.svg" alt="female" width="25" />
+              </figcaption>
+            </div>
+          )}
+        </figure>
+      </div>
+    );
+  };
+
+  const SameGenderSprites = () => {
+    return (
+      <div className="same-gender-sprite-list">
+        <figure>
+          <img src={spriteList.front_default} alt="default sprite" width="96" height="96" />
+          <figcaption>
+            default
+            {/* <img src="icons/both-genders.svg" alt="both genders" width="35" /> */}
+          </figcaption>
+        </figure>
+        {spriteList.front_shiny && (
+          <figure>
+            <img src={spriteList.front_shiny} alt="shiny sprite" width="96" height="96" />
+            <figcaption>
+              shiny{/* shiny <img src="icons/both-genders.svg" alt="both genders" width="35" /> */}
+            </figcaption>
+          </figure>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <div className="sprite-list">
+      <h3>Sprites</h3>
+      {differentGenders && (
+        <div>
+          <MixedGenderSprites />
+        </div>
+      )}
+
+      {!differentGenders && <SameGenderSprites />}
+    </div>
+  );
+};
+
 export default function App() {
   // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemon, setPokemon] = useState<Pokemon | null>(samplePokemon);
   const [heldItems, setHeldItems] = useState<{ name: string; sprite: string }[]>([]);
 
+  const date = new Date();
+  const pokemonOfTheDayId = date.getDay() * date.getDate() * Math.ceil(date.getMonth() / 2);
+  const [pokemonOfTheDay] = useState(pokemonOfTheDayId);
+
   const fetchNewRandomPokemon = async () => {
     try {
-      const newPokemon = await getRandomPokemon();
-      console.log(newPokemon);
+      const newPokemon = await getNewPokemon();
+      // console.log(newPokemon);
+      setPokemon(newPokemon);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const fetchPokemonOfTheDay = async () => {
+    try {
+      const newPokemon = await getNewPokemon(pokemonOfTheDay);
+      // console.log(newPokemon);
       setPokemon(newPokemon);
     } catch (error) {
       console.error('Error:', error);
@@ -174,8 +267,10 @@ export default function App() {
   }, [pokemon]);
 
   return (
-    <div>
-      <button onClick={fetchNewRandomPokemon}>Click me</button>
+    <div id="app">
+      <h1>Random Pokemon generator</h1>
+      <button onClick={fetchNewRandomPokemon}>Give me a random pokemon</button>
+      <button onClick={fetchPokemonOfTheDay}>Pokemon of the day</button>
       {pokemon ? (
         <div className="pokemon-card">
           <div className="pokemon-header">
@@ -183,7 +278,7 @@ export default function App() {
             <div className="pokemon-id">#{pokemon.id}</div>
           </div>
           <div className="pokemon-data">
-            <div>
+            <div className="pokemon-text">
               <TypeList list={pokemon.types} />
               <GenerationDisplay id={pokemon.id} />
               <div className="pokemon-info">
@@ -191,14 +286,11 @@ export default function App() {
                 <HeightList decimeters={pokemon.height} />
               </div>
               <BaseStatList list={pokemon.stats} />
-              <HeldItemsList list={heldItems} />
-              <div>
-                {/* <div className="pokemon-sprites">
-                  <img src={pokemon.sprites.other['official-artwork']['front_default']} alt="" />
-                  <img src={pokemon.sprites.other['official-artwork']['front_shiny']} alt="" />
-                </div> */}
+              <div className="held-items-container">
+                <HeldItemsList list={heldItems} />
               </div>
             </div>
+            <SpriteList spriteList={pokemon.sprites} />
             <img src={pokemon.sprites.other['official-artwork']['front_default']} alt="" />
           </div>
         </div>
