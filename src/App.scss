@@ -63,7 +63,8 @@ body {
 
 .pokemon-card {
   background: $yellow;
-  max-width: 800px;
+  width: 800px;
+  max-width: 100%;
   padding: $spacing-default;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(black, 0.4);
@@ -83,8 +84,9 @@ body {
   background: #fff;
   padding: $spacing-default;
   display: flex;
-  gap: $spacing-large;
   align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-large;
   box-shadow: 0 0 5px rgba(black, 0.7) inset;
 
   & > div > div {

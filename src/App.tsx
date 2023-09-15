@@ -5,6 +5,18 @@ import getHeldItem from './getHeldItem';
 import samplePokemon from './sample-pokemon.json';
 import { Pokemon } from './types';
 
+// const generations = {
+//   1: 'Red/Blue',
+//   2: 'Gold/Silver',
+//   3: 'Ruby/Sapphire',
+//   4: 'Diamond/Pearl',
+//   5: 'Black/White',
+//   6: 'X/Y',
+//   7: 'Sun/Moon',
+//   8: 'Sword/Shield',
+//   9: 'Scarlet/Violet',
+// };
+
 const wikiLink = (url: string) => encodeURI(`https://bulbapedia.bulbagarden.net/wiki/${url}`);
 
 const formatName = (name: string) => name.replace(/-/g, ' ');
@@ -52,8 +64,6 @@ const TypeList = ({ list }) => {
 
 const BaseStatList = ({ list }) => {
   const myList = list.map((item, index) => {
-    const wikiPage = `${wikiLink}Stat#${item.stat.name}`;
-
     return (
       <div key={index} className={item.stat.name}>
         <span>{formatName(item.stat.name)}</span>
@@ -121,7 +131,6 @@ export default function App() {
 
       Promise.all(newHeldItemsPromises)
         .then((resolvedHeldItems) => {
-          console.log(resolvedHeldItems);
           setHeldItems(resolvedHeldItems);
         })
         .catch((error) => {
@@ -146,8 +155,8 @@ export default function App() {
                 <WeightList hectograms={pokemon.weight} />
                 <HeightList decimeters={pokemon.height} />
               </div>
-              <HeldItemsList list={heldItems} />
               <BaseStatList list={pokemon.stats} />
+              <HeldItemsList list={heldItems} />
               <div>
                 {/* <div className="pokemon-sprites">
                   <img src={pokemon.sprites.other['official-artwork']['front_default']} alt="" />
