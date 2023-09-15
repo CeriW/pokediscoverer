@@ -35,6 +35,12 @@ $types: (
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Phudu:wght@500&display=swap');
 
+@each $type, $colour in $types {
+  .#{$type} {
+    background-color: $colour;
+  }
+}
+
 h1 {
   font-size: 3.5em;
   color: #fff;
@@ -69,10 +75,10 @@ button {
   font-size: 1.5em;
   cursor: pointer;
   font-weight: bold;
+  margin: $spacing-default;
 }
 
 #app {
-  background: $blue;
   font-family: Inter, sans-serif;
   display: flex;
   align-items: center;
@@ -83,8 +89,27 @@ button {
   font-weight: 300;
   min-height: 100vh;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
+  transition: background-color 0.3s;
+  position: relative;
+
+  @each $type, $colour in $types {
+    &.sub-theme-#{$type} {
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(transparent, $colour);
+      }
+    }
+  }
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .pokemon-card {
@@ -135,13 +160,6 @@ button {
     font-weight: $fontweight-bold;
     font-size: $fontsize-large;
     margin-right: $spacing-small;
-  }
-
-  @each $type, $color in $types {
-    a.#{$type} {
-      background-color: $color;
-      // Add any other CSS rules you want here
-    }
   }
 }
 

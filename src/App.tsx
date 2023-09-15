@@ -222,6 +222,8 @@ export default function App() {
   // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemon, setPokemon] = useState<Pokemon | null>(samplePokemon);
   const [heldItems, setHeldItems] = useState<{ name: string; sprite: string }[]>([]);
+  const [mainTheme, setMainTheme] = useState('default');
+  const [subTheme, setSubTheme] = useState('default');
 
   const date = new Date();
   const pokemonOfTheDayId = date.getDay() * date.getDate() * Math.ceil(date.getMonth() / 3);
@@ -248,6 +250,12 @@ export default function App() {
   };
 
   useEffect(() => {
+    setMainTheme(pokemon.types[0].type.name);
+    const subTheme = pokemon.types[1] ? pokemon.types[1].type.name : pokemon.types[0].type.name;
+    setSubTheme(subTheme);
+  }, [pokemon]);
+
+  useEffect(() => {
     setHeldItems([]);
 
     if (pokemon) {
@@ -266,11 +274,15 @@ export default function App() {
     }
   }, [pokemon]);
 
+  const themeClassName = `${mainTheme} sub-theme-${subTheme}`;
+
   return (
-    <div id="app">
+    <div id="app" className={themeClassName}>
       <h1>Random Pokemon generator</h1>
-      <button onClick={fetchNewRandomPokemon}>Give me a random pokemon</button>
-      <button onClick={fetchPokemonOfTheDay}>Pokemon of the day</button>
+      <div className="button-panel">
+        <button onClick={fetchNewRandomPokemon}>Give me a random pokemon</button>
+        <button onClick={fetchPokemonOfTheDay}>Pokemon of the day</button>
+      </div>
       {pokemon ? (
         <div className="pokemon-card">
           <div className="pokemon-header">
