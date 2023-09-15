@@ -1,10 +1,10 @@
 import { Pokemon } from './types';
 import samplePokemon from './sample-pokemon.json';
-import { fetchData } from './App';
+import { fetchData } from './fetchData';
 
 const getRandomPokemon = async (): Promise<Pokemon> => {
   const randomNumber = Math.ceil(Math.random() * 1010);
-  const myPokemon = await fetchData(`pokemon/${randomNumber}`);
+  const myPokemon = await fetchData(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`);
   console.log(myPokemon);
 
   if (!myPokemon) {

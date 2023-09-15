@@ -7,6 +7,8 @@ import { Pokemon } from './types';
 
 const wikiLink = (url: string) => `https://bulbapedia.bulbagarden.net/wiki/${url}`;
 
+const formatName = (name: string) => name.replace(/-/g, ' ');
+
 const HeldItemsList = ({ list }) => {
   if (list.length === 0) {
     return;
@@ -21,7 +23,7 @@ const HeldItemsList = ({ list }) => {
     return (
       <a key={index} href={`https://bulbapedia.bulbagarden.net/wiki/${wikiName}`} target="_blank" rel="noreferrer">
         <img src={item.sprite} alt={`${item.name} sprite`} />
-        {item.name}
+        {formatName(item.name)}
       </a>
     );
   });
@@ -45,14 +47,19 @@ const TypeList = ({ list }) => {
     );
   });
 
-  return <div>{myList}</div>;
+  return (
+    <div>
+      <h3>Types</h3>
+      {myList}
+    </div>
+  );
 };
 
 const BaseStatList = ({ list }) => {
   const myList = list.map((item, index) => {
     return (
       <div key={index}>
-        <span>{item.stat.name}:</span>
+        <span>{formatName(item.stat.name)}:</span>
         <span>{item.base_stat}</span>
       </div>
     );
@@ -88,10 +95,38 @@ const HeightList = ({ decimeters }) => {
   );
 };
 
+// const getSpeciesInfo = async (id: number) => {
+//   // Define the API endpoint URL
+//   const apiUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+
+//   // Make a GET request to the API
+//   return fetch(apiUrl)
+//     .then((response) => {
+//       // Check if the response status is OK (status code 200)
+//       if (!response.ok) {
+//         throw new Error(`HTTP error! Status: ${response.status}`);
+//       }
+
+//       // Parse the JSON response and return it
+//       return response.json();
+//     })
+//     .then((data) => {
+//       // Return the data from the API
+//       console.log(data);
+//       return data;
+//     })
+//     .catch((error) => {
+//       // Handle any errors that occur during the fetch
+//       console.error('Error fetching data:', error);
+//     });
+// };
+
 export default function App() {
   // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemon, setPokemon] = useState<Pokemon | null>(samplePokemon);
   const [heldItems, setHeldItems] = useState<{ name: string; sprite: string }[]>([]);
+  const [speciesInfo, setSpeciesInfo] = useState(null);
+  // const [evolutionChain, setEvolutionChain] = useState(null);
 
   const fetchNewRandomPokemon = async () => {
     try {
@@ -120,6 +155,22 @@ export default function App() {
         });
     }
   }, [pokemon]);
+
+  // useEffect(() => {
+  //   const fetchSpeciesInfo = async () => {
+  //     try {
+  //       const speciesInfo = await getSpeciesInfo(pokemon.id);
+  //       console.log(speciesInfo);
+  //       setSpeciesInfo(speciesInfo.evolutionChain);
+  //     } catch (error) {
+  //       console.error('Error fetching species:', error);
+  //     }
+  //   };
+
+  //   if (pokemon) {
+  //     fetchSpeciesInfo();
+  //   }
+  // }, [pokemon]);
 
   return (
     <div>
