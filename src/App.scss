@@ -1,0 +1,164 @@
+$blue: #3463ae;
+$yellow: #ffcb05;
+
+$spacing-small: 5px;
+$spacing-default: 15px;
+$spacing-large: 25px;
+
+$fontweight-medium: 500;
+$fontweight-bold: 700;
+
+$fontsize-large: 1.25em;
+
+$types: (
+  normal: #a8a77a,
+  fire: #ee8130,
+  water: #6390f0,
+  electric: #f7d02c,
+  grass: #7ac74c,
+  ice: #96d9d6,
+  fighting: #c22e28,
+  poison: #a33ea1,
+  ground: #e2bf65,
+  flying: #a98ff3,
+  psychic: #f95587,
+  bug: #a6b91a,
+  rock: #b6a136,
+  ghost: #735797,
+  dragon: #6f35fc,
+  dark: #705746,
+  steel: #b7b7ce,
+  fairy: #d685ad,
+);
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Phudu:wght@500&display=swap');
+
+h2 {
+  font-size: 1.75em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h2,
+h3 {
+  margin: 0;
+  font-family: Phudu, Inter, sans-serif;
+}
+
+h3 {
+  margin-bottom: $spacing-small;
+}
+
+body {
+  background: $blue;
+  font-family: Inter, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: $spacing-default;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.pokemon-card {
+  background: $yellow;
+  max-width: 800px;
+  padding: $spacing-default;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(black, 0.4);
+}
+
+.pokemon-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: $fontweight-bold;
+  padding: 0 0 $spacing-default;
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+
+.pokemon-data {
+  background: #fff;
+  padding: $spacing-default;
+  display: flex;
+  gap: $spacing-large;
+  align-items: flex-start;
+  box-shadow: 0 0 5px rgba(black, 0.7) inset;
+
+  & > div > div {
+    margin-bottom: $spacing-large;
+  }
+}
+
+.type-list {
+  margin: $spacing-default 0;
+
+  a {
+    padding: $spacing-small $spacing-default;
+    border-radius: 20px;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: $fontweight-bold;
+    font-size: $fontsize-large;
+    margin-right: $spacing-small;
+  }
+
+  @each $type, $color in $types {
+    a.#{$type} {
+      background-color: $color;
+      // Add any other CSS rules you want here
+    }
+  }
+}
+
+.held-items-list {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    color: #000;
+    gap: $spacing-small;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+.base-stats {
+  width: fit-content;
+
+  h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    a {
+      font-size: 18px;
+      border: 1px solid #000;
+      border-radius: 50%;
+      width: 22px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: initial;
+      color: #000;
+    }
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-default;
+    text-transform: capitalize;
+  }
+
+  .hp {
+    text-transform: uppercase;
+  }
+}

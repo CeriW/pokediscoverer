@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import getRandomPokemon from './getRandomPokemon';
 import getHeldItem from './getHeldItem';
 import samplePokemon from './sample-pokemon.json';
 import { Pokemon } from './types';
 
-const wikiLink = (url: string) => `https://bulbapedia.bulbagarden.net/wiki/${url}`;
+const wikiLink = (url: string) => encodeURI(`https://bulbapedia.bulbagarden.net/wiki/${url}`);
 
 const formatName = (name: string) => name.replace(/-/g, ' ');
 
@@ -29,7 +29,7 @@ const HeldItemsList = ({ list }) => {
   });
 
   return (
-    <div>
+    <div className="held-items-list">
       <h3>Held items</h3>
       {myList}
     </div>
@@ -47,27 +47,29 @@ const TypeList = ({ list }) => {
     );
   });
 
-  return (
-    <div>
-      <h3>Types</h3>
-      {myList}
-    </div>
-  );
+  return <div className="type-list">{myList}</div>;
 };
 
 const BaseStatList = ({ list }) => {
   const myList = list.map((item, index) => {
+    const wikiPage = `${wikiLink}Stat#${item.stat.name}`;
+
     return (
-      <div key={index}>
-        <span>{formatName(item.stat.name)}:</span>
+      <div key={index} className={item.stat.name}>
+        <span>{formatName(item.stat.name)}</span>
         <span>{item.base_stat}</span>
       </div>
     );
   });
 
   return (
-    <div>
-      <h3>Base stats</h3>
+    <div className="base-stats">
+      <h3>
+        Base stats
+        <a href="https://bulbapedia.bulbagarden.net/wiki/Stat#List_of_stats" target="_blank" rel="noreferrer">
+          ?
+        </a>
+      </h3>
       {myList}
     </div>
   );
@@ -79,7 +81,7 @@ const WeightList = ({ hectograms }) => {
 
   return (
     <div>
-      Weight: {kg} kg ({lbs} lbs)
+      <b>Weight</b>: {kg} kg ({lbs} lbs)
     </div>
   );
 };
@@ -90,43 +92,15 @@ const HeightList = ({ decimeters }) => {
 
   return (
     <div>
-      Height: {cm} cm ({inches} inches)
+      <b>Height</b>: {cm} cm ({inches} inches)
     </div>
   );
 };
-
-// const getSpeciesInfo = async (id: number) => {
-//   // Define the API endpoint URL
-//   const apiUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
-
-//   // Make a GET request to the API
-//   return fetch(apiUrl)
-//     .then((response) => {
-//       // Check if the response status is OK (status code 200)
-//       if (!response.ok) {
-//         throw new Error(`HTTP error! Status: ${response.status}`);
-//       }
-
-//       // Parse the JSON response and return it
-//       return response.json();
-//     })
-//     .then((data) => {
-//       // Return the data from the API
-//       console.log(data);
-//       return data;
-//     })
-//     .catch((error) => {
-//       // Handle any errors that occur during the fetch
-//       console.error('Error fetching data:', error);
-//     });
-// };
 
 export default function App() {
   // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemon, setPokemon] = useState<Pokemon | null>(samplePokemon);
   const [heldItems, setHeldItems] = useState<{ name: string; sprite: string }[]>([]);
-  const [speciesInfo, setSpeciesInfo] = useState(null);
-  // const [evolutionChain, setEvolutionChain] = useState(null);
 
   const fetchNewRandomPokemon = async () => {
     try {
@@ -156,37 +130,32 @@ export default function App() {
     }
   }, [pokemon]);
 
-  // useEffect(() => {
-  //   const fetchSpeciesInfo = async () => {
-  //     try {
-  //       const speciesInfo = await getSpeciesInfo(pokemon.id);
-  //       console.log(speciesInfo);
-  //       setSpeciesInfo(speciesInfo.evolutionChain);
-  //     } catch (error) {
-  //       console.error('Error fetching species:', error);
-  //     }
-  //   };
-
-  //   if (pokemon) {
-  //     fetchSpeciesInfo();
-  //   }
-  // }, [pokemon]);
-
   return (
     <div>
       <button onClick={fetchNewRandomPokemon}>Click me</button>
       {pokemon ? (
-        <div>
-          <HeldItemsList list={heldItems} />
-          <TypeList list={pokemon.types} />
-          <BaseStatList list={pokemon.stats} />
-          <h2 className="pokemon-name">{pokemon.name}</h2>
-          <div className="pokemon-id">#{pokemon.id}</div>
-          <WeightList hectograms={pokemon.weight} />
-          <HeightList decimeters={pokemon.height} />
-          <div className="pokemon-sprites">
+        <div className="pokemon-card">
+          <div className="pokemon-header">
+            <h2 className="pokemon-name">{pokemon.name}</h2>
+            <div className="pokemon-id">#{pokemon.id}</div>
+          </div>
+          <div className="pokemon-data">
+            <div>
+              <div className="pokemon-info">
+                <TypeList list={pokemon.types} />
+                <WeightList hectograms={pokemon.weight} />
+                <HeightList decimeters={pokemon.height} />
+              </div>
+              <HeldItemsList list={heldItems} />
+              <BaseStatList list={pokemon.stats} />
+              <div>
+                {/* <div className="pokemon-sprites">
+                  <img src={pokemon.sprites.other['official-artwork']['front_default']} alt="" />
+                  <img src={pokemon.sprites.other['official-artwork']['front_shiny']} alt="" />
+                </div> */}
+              </div>
+            </div>
             <img src={pokemon.sprites.other['official-artwork']['front_default']} alt="" />
-            <img src={pokemon.sprites.other['official-artwork']['front_shiny']} alt="" />
           </div>
         </div>
       ) : (

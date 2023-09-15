@@ -1,4 +1,4 @@
-export const fetchData = async (url: string) => {
+const fetchData = async (url: string) => {
   // const apiUrl = appendPath ? `https://pokeapi.co/api/v2/${url}` : url;
 
   // Make a GET request to the API
@@ -22,3 +22,5 @@ export const fetchData = async (url: string) => {
       console.error('Error fetching data:', error);
     });
 };
+
+export default fetchData;
