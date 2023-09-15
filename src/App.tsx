@@ -5,18 +5,6 @@ import getHeldItem from './getHeldItem';
 import samplePokemon from './sample-pokemon.json';
 import { Pokemon } from './types';
 
-// const generations = {
-//   1: 'Red/Blue',
-//   2: 'Gold/Silver',
-//   3: 'Ruby/Sapphire',
-//   4: 'Diamond/Pearl',
-//   5: 'Black/White',
-//   6: 'X/Y',
-//   7: 'Sun/Moon',
-//   8: 'Sword/Shield',
-//   9: 'Scarlet/Violet',
-// };
-
 const wikiLink = (url: string) => encodeURI(`https://bulbapedia.bulbagarden.net/wiki/${url}`);
 
 const formatName = (name: string) => name.replace(/-/g, ' ');
@@ -107,6 +95,50 @@ const HeightList = ({ decimeters }) => {
   );
 };
 
+const GenerationDisplay = ({ id }) => {
+  const calculateGeneration = (id: number): string | undefined => {
+    console.log(id);
+    if (id <= 151) {
+      return 'Red/Blue (gen 1)';
+    }
+    if (id <= 251) {
+      return 'Gold/Silver (gen 2)';
+    }
+    if (id <= 386) {
+      return 'Ruby/Sapphire (gen 3)';
+    }
+    if (id <= 493) {
+      return 'Diamond/Pearl (gen 4)';
+    }
+    if (id <= 649) {
+      return 'Black/White (gen 5)';
+    }
+    if (id <= 721) {
+      return 'X/Y (gen 6)';
+    }
+    if (id <= 809) {
+      return 'Sun/Moon (gen 7)';
+    }
+    if (id <= 905) {
+      return 'Sword/Shield (gen 8)';
+    }
+    if (id <= 1021) {
+      return 'Scarlet/Violet (gen 9)';
+    }
+
+    return;
+  };
+
+  const generationText = calculateGeneration(id);
+
+  return (
+    <div>
+      <b>First seen in</b>:<br />
+      Pokemon {generationText}
+    </div>
+  );
+};
+
 export default function App() {
   // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemon, setPokemon] = useState<Pokemon | null>(samplePokemon);
@@ -150,8 +182,9 @@ export default function App() {
           </div>
           <div className="pokemon-data">
             <div>
+              <TypeList list={pokemon.types} />
+              <GenerationDisplay id={pokemon.id} />
               <div className="pokemon-info">
-                <TypeList list={pokemon.types} />
                 <WeightList hectograms={pokemon.weight} />
                 <HeightList decimeters={pokemon.height} />
               </div>
