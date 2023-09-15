@@ -1,22 +1,17 @@
 import { Pokemon } from './types';
 import samplePokemon from './sample-pokemon.json';
+import { fetchData } from './App';
 
-const getRandomPokemon = (): Promise<Pokemon> => {
+const getRandomPokemon = async (): Promise<Pokemon> => {
   const randomNumber = Math.ceil(Math.random() * 1010);
-  const apiUrl = `https://pokeapi.co/api/v2/pokemon/${randomNumber}`;
+  const myPokemon = await fetchData(`pokemon/${randomNumber}`);
+  console.log(myPokemon);
 
-  return fetch(apiUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json() as unknown as Pokemon; // Cast the result as Pokemon
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      // return undefined; // Return undefined in case of an error
-      return samplePokemon as Pokemon;
-    });
+  if (!myPokemon) {
+    return samplePokemon as Pokemon;
+  }
+
+  return myPokemon as Pokemon;
 };
 
 export default getRandomPokemon;
