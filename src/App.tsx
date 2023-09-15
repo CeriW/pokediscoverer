@@ -155,6 +155,8 @@ export default function App() {
   };
 
   useEffect(() => {
+    setHeldItems([]);
+
     if (pokemon) {
       const newHeldItemsPromises = pokemon.held_items.map(async (item) => {
         const itemInfo = await getHeldItem(item.item.url);
