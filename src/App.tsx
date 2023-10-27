@@ -310,7 +310,7 @@ export default function App() {
               </div>
             </div>
             <SpriteList spriteList={pokemon.sprites} />
-            <img src={pokemon.sprites.other['official-artwork']['front_default']} alt="" />
+            <img className="main-artwork" src={pokemon.sprites.other['official-artwork']['front_default']} alt="" />
           </div>
         </div>
       ) : (

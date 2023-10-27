@@ -261,7 +261,13 @@ button {
   }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1300px) {
+  .main-artwork {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 960px) {
   .pokemon-data {
     flex-direction: column;
 
