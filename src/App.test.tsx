@@ -1,12 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders basic page content', () => {
   render(<App />);
   const title = screen.getByText(/Random Pokemon generator/i);
   expect(title).toBeInTheDocument();
 
-  // expect(screen.getByText(/Random Pokemon generator/)).toBeInTheDocument();
-  // const linkElement = screen.getByText(/learn react/i);
-  // expect(linkElement).toBeInTheDocument();
+  const generateButton = screen.getByTestId('random-pokemon-btn');
+  expect(generateButton).toBeInTheDocument();
+
+  const pokemonOfTheDayButton = screen.getByTestId('pokemon-of-the-day-btn');
+  expect(pokemonOfTheDayButton).toBeInTheDocument();
 });

@@ -277,8 +277,12 @@ export default function App() {
     <div id="app" className={themeClassName}>
       <h1>Random Pokemon generator</h1>
       <div className="button-panel">
-        <button onClick={fetchNewRandomPokemon}>Give me a random pokemon</button>
-        <button onClick={fetchPokemonOfTheDay}>Pokemon of the day</button>
+        <button onClick={fetchNewRandomPokemon} data-testid="random-pokemon-btn">
+          Give me a random pokemon
+        </button>
+        <button onClick={fetchPokemonOfTheDay} data-testid="pokemon-of-the-day-btn">
+          Pokemon of the day
+        </button>
       </div>
       {pokemon ? (
         <div className="pokemon-card">
