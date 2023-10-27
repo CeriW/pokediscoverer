@@ -21,4 +21,4 @@ You will need [Node](https://nodejs.org/en) installed to be able to run this on 
 
 ## Legal
 
-All pokemon info displayed is Copyright The Pokémon Company.
+All info and images are © The Pokemon Company and Nintendo
