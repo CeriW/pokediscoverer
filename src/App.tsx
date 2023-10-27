@@ -252,6 +252,15 @@ export default function App() {
     }
   };
 
+  const fetchMyFavouritePokemon = async () => {
+    try {
+      const newPokemon = await getNewPokemon(2);
+      setPokemon(newPokemon);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   useEffect(() => {
     setMainTheme(pokemon.types[0].type.name);
     const subTheme = pokemon.types[1] ? pokemon.types[1].type.name : pokemon.types[0].type.name;
@@ -316,6 +325,14 @@ export default function App() {
       ) : (
         ''
       )}
+      <footer>
+        <a href="https://github.com/cherrycodesnet/random-pokemon" target="_blank" rel="noreferrer">
+          About this project
+        </a>
+        <div className="my-fav-pokemon" onClick={fetchMyFavouritePokemon}>
+          Developer's favourite pokemon
+        </div>
+      </footer>
     </div>
   );
 }

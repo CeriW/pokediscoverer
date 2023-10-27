@@ -261,6 +261,25 @@ button {
   }
 }
 
+footer {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: $spacing-small $spacing-default;
+  border-radius: 5px;
+  gap: $spacing-large;
+  margin-top: $spacing-large;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.9);
+
+  & > a,
+  & > div {
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
 @media (max-width: 1300px) {
   .main-artwork {
     max-width: 420px;
