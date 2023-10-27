@@ -15,7 +15,7 @@ const HeldItemsList = ({ list }) => {
   }
 
   const myList = list.map((item, index) => {
-    const wikiName = item.name.replace(/-(.)/g, function (match, capturedCharacter) {
+    const wikiName = item.name.replace(/-(.)/g, function (capturedCharacter) {
       const upperCaseCharacter = capturedCharacter.toUpperCase();
       return `_${upperCaseCharacter}`;
     });
@@ -219,7 +219,6 @@ const SpriteList = ({ spriteList }) => {
 };
 
 export default function App() {
-  // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemon, setPokemon] = useState<Pokemon | null>(samplePokemon);
   const [heldItems, setHeldItems] = useState<{ name: string; sprite: string }[]>([]);
   const [mainTheme, setMainTheme] = useState('default');
