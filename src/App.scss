@@ -28,7 +28,7 @@ $types: (
   rock: #b6a136,
   ghost: #735797,
   dragon: #6f35fc,
-  dark: #705746,
+  dark: #2c2c2c,
   steel: #b7b7ce,
   fairy: #d685ad,
 );
@@ -140,7 +140,7 @@ button {
   gap: $spacing-large;
   box-shadow: 0 0 5px rgba(black, 0.7) inset;
 
-  & > div > div:not(.held-items-list) {
+  & > div > div:not(:last-child) {
     margin-bottom: $spacing-large;
   }
 }
