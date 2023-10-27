@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.scss';
 import getNewPokemon from './getRandomPokemon';
 import getHeldItem from './getHeldItem';
@@ -232,7 +232,6 @@ export default function App() {
   const fetchNewRandomPokemon = async () => {
     try {
       const newPokemon = await getNewPokemon();
-      // console.log(newPokemon);
       setPokemon(newPokemon);
     } catch (error) {
       console.error('Error:', error);
@@ -242,7 +241,6 @@ export default function App() {
   const fetchPokemonOfTheDay = async () => {
     try {
       const newPokemon = await getNewPokemon(pokemonOfTheDay);
-      // console.log(newPokemon);
       setPokemon(newPokemon);
     } catch (error) {
       console.error('Error:', error);
