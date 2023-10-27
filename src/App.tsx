@@ -21,7 +21,13 @@ const HeldItemsList = ({ list }) => {
     });
 
     return (
-      <a key={index} href={`https://bulbapedia.bulbagarden.net/wiki/${wikiName}`} target="_blank" rel="noreferrer">
+      <a
+        key={index}
+        href={`https://bulbapedia.bulbagarden.net/wiki/${wikiName}`}
+        target="_blank"
+        rel="noreferrer"
+        data-testid={`held-item-${index}`}
+      >
         <img src={item.sprite} alt={`${item.name} sprite`} />
         {formatName(item.name)}
       </a>

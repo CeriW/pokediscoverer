@@ -12,3 +12,10 @@ test('renders basic page content', () => {
   const pokemonOfTheDayButton = screen.getByTestId('pokemon-of-the-day-btn');
   expect(pokemonOfTheDayButton).toBeInTheDocument();
 });
+
+test('renders pikachu info on first load', () => {
+  render(<App />);
+  expect(screen.getByText('pikachu')).toBeInTheDocument();
+  expect(screen.getByText('oran berry')).toBeInTheDocument();
+  expect(screen.getByText('light ball')).toBeInTheDocument();
+});
