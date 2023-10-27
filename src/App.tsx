@@ -326,12 +326,16 @@ export default function App() {
         ''
       )}
       <footer>
-        <a href="https://github.com/cherrycodesnet/random-pokemon" target="_blank" rel="noreferrer">
-          About this project
-        </a>
-        <div className="my-fav-pokemon" onClick={fetchMyFavouritePokemon}>
-          Developer's favourite pokemon
+        <div>
+          <a href="https://github.com/cherrycodesnet/random-pokemon" target="_blank" rel="noreferrer">
+            About this project
+          </a>
+          <div className="my-fav-pokemon" onClick={fetchMyFavouritePokemon}>
+            Developer's favourite pokemon
+          </div>
         </div>
+
+        <sub>All info and images are © The Pokemon Company and Nintendo</sub>
       </footer>
     </div>
   );
