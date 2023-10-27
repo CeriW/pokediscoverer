@@ -59,7 +59,7 @@ const TypeList = ({ list }) => {
 const BaseStatList = ({ list }) => {
   const myList = list.map((item, index) => {
     return (
-      <div key={index} className={item.stat.name}>
+      <div key={index} className={item.stat.name} data-testid={`base-stat-${item.stat.name}`}>
         <span>{formatName(item.stat.name)}</span>
         <span>{item.base_stat}</span>
       </div>
@@ -291,7 +291,7 @@ export default function App() {
         </button>
       </div>
       {pokemon ? (
-        <div className="pokemon-card">
+        <div className="pokemon-card" data-testid="pokemon-card">
           <div className="pokemon-header">
             <h2 className="pokemon-name">{pokemon.name}</h2>
             <div className="pokemon-id">#{pokemon.id}</div>
