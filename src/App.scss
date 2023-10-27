@@ -44,6 +44,8 @@ $types: (
 h1 {
   font-size: 3.5em;
   color: #fff;
+  text-align: center;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -63,6 +65,10 @@ h3 {
 
 h3 {
   margin-bottom: $spacing-small;
+}
+
+img {
+  max-width: 100%;
 }
 
 button {
@@ -112,9 +118,13 @@ button {
   }
 }
 
+.button-panel {
+  display: flex;
+  justify-content: center;
+}
+
 .pokemon-card {
   background: $yellow;
-  // width: 800px;
   max-width: 100%;
   padding: $spacing-default;
   border-radius: 10px;
@@ -248,5 +258,71 @@ button {
     span {
       display: none;
     }
+  }
+}
+
+@media (max-width: 960px) {
+  * {
+    text-align: center;
+  }
+
+  .pokemon-data {
+    flex-direction: column;
+  }
+
+  .sprite-list {
+    width: 100%;
+    order: 2;
+    text-align: center;
+  }
+
+  .sprite-list .same-gender-sprite-list,
+  .sprite-list .different-gender-sprite-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pokemon-text {
+    order: 2;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+
+  .button-panel {
+    gap: 6px;
+  }
+
+  .button-panel button {
+    margin: 20px 0;
+    font-size: 1.3em;
+  }
+
+  .held-items-list a {
+    justify-content: space-between;
+  }
+
+  .held-items-container {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 2.2em;
+  }
+
+  h2 {
+    font-size: 1.25em;
+  }
+
+  .button-panel button {
+    font-size: 1.1em;
   }
 }
