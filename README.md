@@ -8,8 +8,9 @@ This project was created as my first proper foray into learning React. It random
 - Written in Typescript with typing used throughout
 - Uses async/await functions to call [PokeAPI](https://pokeapi.co/)
 - Has a sample pokemon (Pikachu) stored in a json file for use should the API call fail
-- Auto-deploys to Github Pages using a yaml CI/CD action
+- Auto-deploys to Github Pages using a yaml CI/CD action whenever changes are made to the master branch
 - Includes some basic Jest testing
+- Styled using SCSS
 
 ## Running locally
 
