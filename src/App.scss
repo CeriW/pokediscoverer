@@ -245,5 +245,9 @@ button {
     align-items: center;
     font-size: small;
     padding: 3px;
+
+    span {
+      display: none;
+    }
   }
 }
