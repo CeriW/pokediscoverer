@@ -13,8 +13,7 @@ $fontsize-large: 1.25em;
 $radius-small: 5px;
 
 $types: (
-  // normal: #a8a77a,
-  normal: red,
+  normal: #a8a77a,
   fire: #ee8130,
   water: #6390f0,
   electric: #f7d02c,
@@ -31,7 +30,7 @@ $types: (
   dragon: #6f35fc,
   dark: #2c2c2c,
   steel: #b7b7ce,
-  fairy: #d685ad
+  fairy: #d685ad,
 );
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Phudu:wght@500&display=swap');
