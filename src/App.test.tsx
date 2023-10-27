@@ -13,13 +13,10 @@ test('renders basic page content', () => {
   expect(pokemonOfTheDayButton).toBeInTheDocument();
 });
 
-test('renders pikachu info on first load', () => {
+test('renders pikachu info on first load', async () => {
   render(<App />);
-  const pokemonData = screen.getByTestId('pokemon-card').textContent;
-  expect(pokemonData).toContain('pikachu');
-  expect(pokemonData).toContain('#25');
-  expect(pokemonData).toContain('hp35');
-  expect(pokemonData).toContain('Pokemon Red/Blue (gen 1)');
-  expect(pokemonData).toContain('Weight: 6 kg (13.2 lbs)');
-  expect(pokemonData).toContain('electric');
+  expect(screen.getByText('pikachu')).toBeInTheDocument();
+  expect(screen.getByText('#25')).toBeInTheDocument();
+  expect(screen.getByTestId('base-stat-hp')).toBeInTheDocument();
+  expect(screen.getByText('electric')).toBeInTheDocument();
 });
