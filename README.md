@@ -18,3 +18,7 @@ You will need [Node](https://nodejs.org/en) installed to be able to run this on 
 
 - In your terminal, ensure you have the necessary npm packages installed by running `npm install`
 - `npm start` will then run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Legal
+
+All pokemon info displayed is Copyright The Pokémon Company.
