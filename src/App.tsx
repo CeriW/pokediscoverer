@@ -151,14 +151,20 @@ const SpriteList = ({ spriteList }) => {
     return (
       <div className="different-gender-sprite-list">
         <figure>
-          <img src={spriteList.front_default} alt="male sprite" width="96" />
+          <picture>
+            <source srcSet={spriteList.front_default} type="image/png" />
+            <img src="icons/sprite-placeholder.svg" alt="Missing sprite" width="96" />
+          </picture>
           <figcaption>
             <span>&nbsp;</span>
             <img src="icons/male.svg" alt="male" width="25" />
           </figcaption>
         </figure>
         <figure>
-          <img src={spriteList.front_female} alt="female sprite" width="96" />
+          <picture>
+            <source srcSet={spriteList.front_female} type="image/png" />
+            <img src="icons/sprite-placeholder.svg" alt="Missing sprite" width="96" />
+          </picture>
           <figcaption>
             <span></span>
             <img src="icons/female.svg" alt="female" width="25" />
@@ -167,7 +173,10 @@ const SpriteList = ({ spriteList }) => {
         <figure>
           {spriteList.front_shiny && (
             <div>
-              <img src={spriteList.front_shiny} alt="male shiny sprite" width="96" />
+              <picture>
+                <source srcSet={spriteList.front_shiny} type="image/png" />
+                <img src="icons/sprite-placeholder.svg" alt="Missing sprite" width="96" />
+              </picture>
               <figcaption>
                 shiny <img src="icons/male.svg" alt="male" width="25" />
               </figcaption>
@@ -177,7 +186,10 @@ const SpriteList = ({ spriteList }) => {
         <figure>
           {spriteList.front_shiny_female && (
             <div>
-              <img src={spriteList.front_shiny_female} alt="female shiny sprite" width="96" height="96" />
+              <picture>
+                <source srcSet={spriteList.front_shiny_female} type="image/png" />
+                <img src="icons/sprite-placeholder.svg" alt="Missing sprite" width="96" />
+              </picture>
               <figcaption>
                 shiny <img src="icons/female.svg" alt="female" width="25" />
               </figcaption>
@@ -192,21 +204,15 @@ const SpriteList = ({ spriteList }) => {
     return (
       <div className="same-gender-sprite-list">
         <figure>
-          {/* <img src={spriteList.front_default} alt="default sprite" width="96" height="96" /> */}
           <picture>
             <source srcSet={spriteList.front_default} type="image/png" />
             <img src="icons/sprite-placeholder.svg" alt="Missing sprite" width="96" />
           </picture>
 
-          <figcaption>
-            default
-            {/* <img src="icons/both-genders.svg" alt="both genders" width="35" /> */}
-          </figcaption>
+          <figcaption>default</figcaption>
         </figure>
         {spriteList.front_shiny && (
           <figure>
-            {/* <img src={spriteList.front_shiny} alt="shiny sprite" width="96" height="96" /> */}
-
             <picture>
               <source srcSet={spriteList.front_shiny} type="image/png" />
               <img src="icons/sprite-placeholder.svg" alt="Missing sprite" width="96" />
