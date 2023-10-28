@@ -255,11 +255,13 @@ export default function App() {
   };
 
   const fetchMyFavouritePokemon = async () => {
-    try {
-      const newPokemon = await getNewPokemon(2);
-      setPokemon(newPokemon);
-    } catch (error) {
-      console.error('Error:', error);
+    if (pokemon.id !== 2) {
+      try {
+        const newPokemon = await getNewPokemon(2);
+        setPokemon(newPokemon);
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   };
 
