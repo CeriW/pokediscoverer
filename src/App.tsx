@@ -244,11 +244,13 @@ export default function App() {
   };
 
   const fetchPokemonOfTheDay = async () => {
-    try {
-      const newPokemon = await getNewPokemon(pokemonOfTheDay);
-      setPokemon(newPokemon);
-    } catch (error) {
-      console.error('Error:', error);
+    if (pokemon.id !== pokemonOfTheDayId) {
+      try {
+        const newPokemon = await getNewPokemon(pokemonOfTheDay);
+        setPokemon(newPokemon);
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   };
 
