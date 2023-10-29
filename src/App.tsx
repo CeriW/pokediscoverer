@@ -328,7 +328,7 @@ export default function App() {
             value={null}
             onChange={(event: any, newValue: string | null) => {
               if (newValue) {
-                fetchNewPokemon(newValue?.toLowerCase());
+                fetchNewPokemon(pokemonList.indexOf(newValue) + 1);
                 event.target.value = null;
               }
             }}
