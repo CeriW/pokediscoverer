@@ -33,7 +33,7 @@ $types: (
   fairy: #d685ad,
 );
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Dosis:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Dosis:wght@700;800&display=swap');
 
 @each $type, $colour in $types {
   .#{$type} {
@@ -192,6 +192,10 @@ button {
   padding: 0 0 $spacing-default;
   font-size: 1.5em;
   text-transform: uppercase;
+
+  h2 {
+    font-weight: 800;
+  }
 }
 
 .pokemon-data {
