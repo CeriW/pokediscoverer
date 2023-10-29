@@ -248,33 +248,12 @@ export default function App() {
   const [subTheme, setSubTheme] = useState('default');
 
   const date = new Date();
-  const pokemonOfTheDayId = date.getDay() * date.getDate() * Math.ceil(date.getMonth() / 3);
-  const [pokemonOfTheDay] = useState(pokemonOfTheDayId);
+  const pokemonOfTheDayId = date.getDay() + 1 * date.getDate() * Math.ceil(date.getMonth() / 3) + 1;
 
-  const fetchNewRandomPokemon = async () => {
-    try {
-      const newPokemon = await getNewPokemon();
-      setPokemon(newPokemon);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
-  const fetchPokemonOfTheDay = async () => {
-    if (pokemon.id !== pokemonOfTheDayId) {
+  const fetchNewPokemon = async (id?: number) => {
+    if (pokemon.id !== id) {
       try {
-        const newPokemon = await getNewPokemon(pokemonOfTheDay);
-        setPokemon(newPokemon);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-  };
-
-  const fetchMyFavouritePokemon = async () => {
-    if (pokemon.id !== 2) {
-      try {
-        const newPokemon = await getNewPokemon(2);
+        const newPokemon = await getNewPokemon(id);
         setPokemon(newPokemon);
       } catch (error) {
         console.error('Error:', error);
@@ -313,10 +292,20 @@ export default function App() {
     <div id="app" className={themeClassName}>
       <h1>Random Pokemon generator</h1>
       <div className="button-panel">
-        <button onClick={fetchNewRandomPokemon} data-testid="random-pokemon-btn">
+        <button
+          onClick={() => {
+            fetchNewPokemon();
+          }}
+          data-testid="random-pokemon-btn"
+        >
           Give me a random pokemon
         </button>
-        <button onClick={fetchPokemonOfTheDay} data-testid="pokemon-of-the-day-btn">
+        <button
+          onClick={() => {
+            fetchNewPokemon(pokemonOfTheDayId);
+          }}
+          data-testid="pokemon-of-the-day-btn"
+        >
           Pokemon of the day
         </button>
       </div>
@@ -351,7 +340,12 @@ export default function App() {
           <a href="https://github.com/cherrycodesnet/random-pokemon" target="_blank" rel="noreferrer">
             About this project
           </a>
-          <div className="my-fav-pokemon" onClick={fetchMyFavouritePokemon}>
+          <div
+            className="my-fav-pokemon"
+            onClick={() => {
+              fetchNewPokemon(2);
+            }}
+          >
             Developer's favourite pokemon
           </div>
         </div>

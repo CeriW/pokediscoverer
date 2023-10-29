@@ -1,7 +1,6 @@
 import { Pokemon } from './types';
 import samplePokemon from './sample-pokemon.json';
 import favPokemon from './my-fav-pokemon.json';
-
 import fetchData from './fetchData';
 
 const getNewPokemon = async (pokemonId?: number): Promise<Pokemon> => {
