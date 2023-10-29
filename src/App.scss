@@ -33,7 +33,7 @@ $types: (
   fairy: #d685ad,
 );
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Phudu:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Dosis:wght@500&display=swap');
 
 @each $type, $colour in $types {
   .#{$type} {
@@ -60,7 +60,7 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-family: Phudu, Inter, sans-serif;
+  font-family: Dosis, Inter, sans-serif;
 }
 
 h3 {
@@ -76,7 +76,7 @@ button {
   color: #000;
   padding: 5px 10px;
   box-shadow: none;
-  font-family: 'Phudu', cursive;
+  font-family: 'Dosis', cursive;
   border: 5px solid #000;
   font-size: 1.5em;
   cursor: pointer;
