@@ -3,7 +3,7 @@ import App from './App';
 
 test('renders basic page content', () => {
   render(<App />);
-  const title = screen.getByText(/Random Pokemon generator/i);
+  const title = screen.getByText(/PokéDiscoverer/i);
   expect(title).toBeInTheDocument();
 
   const generateButton = screen.getByTestId('random-pokemon-btn');
