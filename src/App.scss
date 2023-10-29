@@ -33,7 +33,7 @@ $types: (
   fairy: #d685ad,
 );
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Dosis:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Dosis:wght@600&display=swap');
 
 @each $type, $colour in $types {
   .#{$type} {
@@ -78,7 +78,7 @@ button {
   box-shadow: none;
   font-family: 'Dosis', cursive;
   border: 5px solid #000;
-  font-size: 1.5em;
+  font-size: 1.25em;
   cursor: pointer;
   font-weight: bold;
   margin: $spacing-default;
@@ -123,7 +123,6 @@ button {
   align-self: center;
   margin-top: -16px;
   margin: -16px $spacing-default 0;
-  // padding: 0 $spacing-small;
 
   label {
     z-index: 3;
@@ -169,6 +168,7 @@ button {
 
 .button-panel > div button {
   transition: 0.3s;
+  text-transform: uppercase;
 }
 
 .button-panel button[disabled] {
@@ -191,6 +191,7 @@ button {
   font-weight: $fontweight-bold;
   padding: 0 0 $spacing-default;
   font-size: 1.5em;
+  text-transform: uppercase;
 }
 
 .pokemon-data {
@@ -383,7 +384,7 @@ footer {
 
   .button-panel > button {
     margin: 20px 0;
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 
   .held-items-list a {
