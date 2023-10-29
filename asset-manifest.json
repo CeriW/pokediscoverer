@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pokediscoverer/static/css/main.389381b6.css",
+    "main.css": "/pokediscoverer/static/css/main.52ca666d.css",
     "main.js": "/pokediscoverer/static/js/main.7eb0fe81.js",
     "static/js/787.7ec31b82.chunk.js": "/pokediscoverer/static/js/787.7ec31b82.chunk.js",
     "index.html": "/pokediscoverer/index.html",
-    "main.389381b6.css.map": "/pokediscoverer/static/css/main.389381b6.css.map",
+    "main.52ca666d.css.map": "/pokediscoverer/static/css/main.52ca666d.css.map",
     "main.7eb0fe81.js.map": "/pokediscoverer/static/js/main.7eb0fe81.js.map",
     "787.7ec31b82.chunk.js.map": "/pokediscoverer/static/js/787.7ec31b82.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.389381b6.css",
+    "static/css/main.52ca666d.css",
     "static/js/main.7eb0fe81.js"
   ]
 }
