@@ -3,8 +3,8 @@ import samplePokemon from './sample-pokemon.json';
 import favPokemon from './my-fav-pokemon.json';
 import fetchData from './fetchData';
 
-const getNewPokemon = async (pokemonId?: number): Promise<Pokemon> => {
-  if (pokemonId === 2) {
+const getNewPokemon = async (pokemonId?: number | string): Promise<Pokemon> => {
+  if (pokemonId === 2 || pokemonId === 'Ivysaur') {
     return favPokemon as Pokemon;
   }
 
