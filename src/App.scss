@@ -118,6 +118,57 @@ button {
   }
 }
 
+.pokemon-selector {
+  background: linear-gradient(to bottom, transparent 15px, #fff 15px);
+  // padding: 0 $spacing-small;
+
+  label {
+    z-index: 3;
+    background: #fff;
+    padding: 0 $spacing-small;
+  }
+
+  .mui-focused label {
+    left: -10px;
+  }
+
+  input {
+    padding-left: $spacing-small !important;
+  }
+
+  *,
+  *:before,
+  *:after {
+    color: #000 !important;
+    border-bottom: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+  }
+
+  .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
+    background: #fff;
+  }
+
+  //   padding: 0 $spacing-small;
+  //   // .MuiInputBase-root {
+  //   //   background: #fff;
+  //   //   color: #000;
+  //   //   border: 2px solid #000;
+
+  //   //   * {
+  //   //     border: none;
+  //   //   }
+
+  //   //   &:after {
+  //   //     display: none;
+  //   //   }
+  //   // }
+
+  //   .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
+  //     color: #000;
+  //   }
+}
+
 .button-panel {
   display: flex;
   justify-content: center;

@@ -294,40 +294,27 @@ export default function App() {
     <div id="app" className={themeClassName}>
       <h1>Random Pokemon generator</h1>
 
-      <Autocomplete
-        // disablePortal
-        // id="combo-box-demo"
-        options={pokemonList}
-        sx={{ width: 300 }}
-        value={null}
-        // inputValue="Pikachu"
-        // onInputChange={(e) => {
-        //   console.log('howdy');
-        //   console.log(e.target);
-        // }}
-        // isOptionEqualToValue={(option, value) => option === value}
-        onChange={(event: any, newValue: string | null) => {
-          // setValue(newValue);
-          console.log(newValue);
-
-          if (newValue) {
-            fetchNewPokemon(newValue?.toLowerCase());
-            event.target.value = null;
-          }
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Pokemon"
-            // onChange={(e) => {
-            //   console.log(e.target.value);
-            // }}
-            // onInput={() => {
-            //   console.log('hello');
-            // }}
-          />
-        )}
-      />
+      <div className="pokemon-selector">
+        <Autocomplete
+          options={pokemonList}
+          sx={{
+            width: 300,
+            // color: '#000',
+            // background: '#fff',
+            // accentColor: '#000',
+            // colorScheme: 'dark',
+            // bgcolor: '#fff',
+          }}
+          value={null}
+          onChange={(event: any, newValue: string | null) => {
+            if (newValue) {
+              fetchNewPokemon(newValue?.toLowerCase());
+              event.target.value = null;
+            }
+          }}
+          renderInput={(params) => <TextField {...params} label="Search" variant="standard" />}
+        />
+      </div>
 
       <div className="button-panel">
         <button
