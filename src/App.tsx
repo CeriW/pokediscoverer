@@ -292,7 +292,7 @@ export default function App() {
 
   return (
     <div id="app" className={themeClassName}>
-      <h1>Random Pokemon generator</h1>
+      <h1>PokéDiscoverer</h1>
 
       <div className="button-panel">
         <div>
