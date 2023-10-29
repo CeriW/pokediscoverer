@@ -293,8 +293,13 @@ export default function App() {
       <h1>Random Pokemon generator</h1>
       <div className="button-panel">
         <button
-          onClick={() => {
+          onClick={(e) => {
             fetchNewPokemon();
+            const thisButton = e.currentTarget;
+            thisButton.disabled = true;
+            setTimeout(() => {
+              thisButton.disabled = false;
+            }, 1000);
           }}
           data-testid="random-pokemon-btn"
         >
