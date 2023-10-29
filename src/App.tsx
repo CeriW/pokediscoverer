@@ -294,50 +294,47 @@ export default function App() {
     <div id="app" className={themeClassName}>
       <h1>Random Pokemon generator</h1>
 
-      <div className="pokemon-selector">
-        <Autocomplete
-          options={pokemonList}
-          sx={{
-            width: 300,
-            // color: '#000',
-            // background: '#fff',
-            // accentColor: '#000',
-            // colorScheme: 'dark',
-            // bgcolor: '#fff',
-          }}
-          value={null}
-          onChange={(event: any, newValue: string | null) => {
-            if (newValue) {
-              fetchNewPokemon(newValue?.toLowerCase());
-              event.target.value = null;
-            }
-          }}
-          renderInput={(params) => <TextField {...params} label="Search" variant="standard" />}
-        />
-      </div>
-
       <div className="button-panel">
-        <button
-          onClick={(e) => {
-            fetchNewPokemon();
-            const thisButton = e.currentTarget;
-            thisButton.disabled = true;
-            setTimeout(() => {
-              thisButton.disabled = false;
-            }, 1500);
-          }}
-          data-testid="random-pokemon-btn"
-        >
-          Give me a random pokemon
-        </button>
-        <button
-          onClick={() => {
-            fetchNewPokemon(pokemonOfTheDayId);
-          }}
-          data-testid="pokemon-of-the-day-btn"
-        >
-          Pokemon of the day
-        </button>
+        <div>
+          <button
+            onClick={(e) => {
+              fetchNewPokemon();
+              const thisButton = e.currentTarget;
+              thisButton.disabled = true;
+              setTimeout(() => {
+                thisButton.disabled = false;
+              }, 1500);
+            }}
+            data-testid="random-pokemon-btn"
+          >
+            Give me a random pokemon
+          </button>
+          <button
+            onClick={() => {
+              fetchNewPokemon(pokemonOfTheDayId);
+            }}
+            data-testid="pokemon-of-the-day-btn"
+          >
+            Pokemon of the day
+          </button>
+        </div>
+
+        <div className="pokemon-selector">
+          <Autocomplete
+            options={pokemonList}
+            sx={{
+              width: 200,
+            }}
+            value={null}
+            onChange={(event: any, newValue: string | null) => {
+              if (newValue) {
+                fetchNewPokemon(newValue?.toLowerCase());
+                event.target.value = null;
+              }
+            }}
+            renderInput={(params) => <TextField {...params} label="Search" variant="standard" />}
+          />
+        </div>
       </div>
       {pokemon ? (
         <div className="pokemon-card" data-testid="pokemon-card">

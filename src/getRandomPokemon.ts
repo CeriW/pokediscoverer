@@ -8,6 +8,10 @@ const getNewPokemon = async (pokemonId?: number | string): Promise<Pokemon> => {
     return favPokemon as Pokemon;
   }
 
+  if (pokemonId === 25 || pokemonId === 'pikachu') {
+    return samplePokemon as Pokemon;
+  }
+
   const pokemonIdToFetch = pokemonId ? pokemonId : Math.ceil(Math.random() * 1021);
   const myPokemon = await fetchData(`https://pokeapi.co/api/v2/pokemon/${pokemonIdToFetch}`);
 

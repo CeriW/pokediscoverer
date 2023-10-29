@@ -120,6 +120,9 @@ button {
 
 .pokemon-selector {
   background: linear-gradient(to bottom, transparent 15px, #fff 15px);
+  align-self: center;
+  margin-top: -16px;
+  margin: -16px $spacing-default 0;
   // padding: 0 $spacing-small;
 
   label {
@@ -136,6 +139,10 @@ button {
     padding-left: $spacing-small !important;
   }
 
+  .css-1q60rmi-MuiAutocomplete-endAdornment {
+    top: 0 !important;
+  }
+
   *,
   *:before,
   *:after {
@@ -148,37 +155,23 @@ button {
   .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
     background: #fff;
   }
-
-  //   padding: 0 $spacing-small;
-  //   // .MuiInputBase-root {
-  //   //   background: #fff;
-  //   //   color: #000;
-  //   //   border: 2px solid #000;
-
-  //   //   * {
-  //   //     border: none;
-  //   //   }
-
-  //   //   &:after {
-  //   //     display: none;
-  //   //   }
-  //   // }
-
-  //   .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
-  //     color: #000;
-  //   }
 }
 
-.button-panel {
+.button-panel,
+.button-panel > div {
   display: flex;
   justify-content: center;
 }
 
-button {
+.button-panel {
+  flex-wrap: wrap;
+}
+
+.button-panel > div button {
   transition: 0.3s;
 }
 
-button[disabled] {
+.button-panel button[disabled] {
   opacity: 0.3;
 }
 
@@ -389,7 +382,7 @@ footer {
     gap: 6px;
   }
 
-  .button-panel button {
+  .button-panel > button {
     margin: 20px 0;
     font-size: 1.3em;
   }
