@@ -123,6 +123,14 @@ button {
   justify-content: center;
 }
 
+button {
+  transition: 0.3s;
+}
+
+button[disabled] {
+  opacity: 0.3;
+}
+
 .pokemon-card {
   background: $yellow;
   max-width: 100%;

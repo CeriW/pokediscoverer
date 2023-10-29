@@ -299,7 +299,7 @@ export default function App() {
             thisButton.disabled = true;
             setTimeout(() => {
               thisButton.disabled = false;
-            }, 1000);
+            }, 1500);
           }}
           data-testid="random-pokemon-btn"
         >
