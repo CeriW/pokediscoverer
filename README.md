@@ -1,4 +1,4 @@
-# PokeDiscoverer
+# PokéDiscoverer
 
 This project was created as my first proper foray into learning React. It randomly generates a pokemon ID number and then uses [PokeAPI](https://pokeapi.co/) to display information about that pokemon back to the user.
 
