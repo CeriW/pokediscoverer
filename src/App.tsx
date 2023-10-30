@@ -231,7 +231,7 @@ const SpriteList = ({ spriteList }) => {
 
   return (
     <div className="sprite-list">
-      <h3>Sprites</h3>
+      <h3>SPRITES</h3>
       {differentGenders && (
         <div>
           <MixedGenderSprites />
