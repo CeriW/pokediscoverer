@@ -38,7 +38,7 @@ const HeldItemsList = ({ list }) => {
 
   return (
     <div className="held-items-list">
-      <h3>Held items</h3>
+      <h3>HELD ITEMS</h3>
       {myList}
     </div>
   );
