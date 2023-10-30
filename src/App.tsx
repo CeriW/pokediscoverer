@@ -71,7 +71,7 @@ const BaseStatList = ({ list }) => {
   return (
     <div className="base-stats">
       <h3>
-        Base stats
+        BASE STATS
         <a href="https://bulbapedia.bulbagarden.net/wiki/Stat#List_of_stats" target="_blank" rel="noreferrer">
           ?
         </a>
