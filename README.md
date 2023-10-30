@@ -11,6 +11,7 @@ This project was created as my first proper foray into learning React. It random
 - Auto-deploys to Github Pages using a yaml CI/CD action whenever changes are made to the master branch
 - Includes some basic Jest testing
 - Styled using SCSS
+- Search textbox/dropdown is aided by the [Material-UI](https://mui.com/material-ui/react-autocomplete/) autocomplete component
 
 ## Running locally
 
