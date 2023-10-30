@@ -386,9 +386,13 @@ footer {
     gap: 6px;
   }
 
-  .button-panel > div button {
-    margin: 20px 0;
-    font-size: 1.1em;
+  .button-panel > div:first-child {
+    gap: $spacing-small;
+
+    button {
+      margin: 20px 0;
+      font-size: 1.1em;
+    }
   }
 
   .held-items-list a {
