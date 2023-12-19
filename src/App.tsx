@@ -249,10 +249,6 @@ export default function App() {
   const [mainTheme, setMainTheme] = useState('default');
   const [subTheme, setSubTheme] = useState('default');
 
-  useEffect(() => {
-    setPokemon(samplePokemon);
-  }, []);
-
   const date = new Date();
   const pokemonOfTheDayId = date.getDay() + 1 * date.getDate() * Math.ceil(date.getMonth() / 3) + 1;
 
