@@ -375,6 +375,7 @@ export default function App() {
           >
             Developer's favourite pokemon
           </div>
+          <a href="https://linktr.ee/cherrycodes">More cool stuff</a>
         </div>
 
         <sub>All info and images are © The Pokemon Company and Nintendo</sub>
