@@ -249,10 +249,6 @@ export default function App() {
   const [mainTheme, setMainTheme] = useState('default');
   const [subTheme, setSubTheme] = useState('default');
 
-  useEffect(() => {
-    setPokemon(samplePokemon);
-  }, []);
-
   const date = new Date();
   const pokemonOfTheDayId = date.getDay() + 1 * date.getDate() * Math.ceil(date.getMonth() / 3) + 1;
 
@@ -379,7 +375,11 @@ export default function App() {
           >
             Developer's favourite pokemon
           </div>
+<<<<<<< HEAD
           <a href="https://linktr.ee/cherrycodes">More cool stuff</a>
+=======
+          <a href="https://linktr.ee/cherrycodes" target="_blank">More cool stuff</a>
+>>>>>>> c5366bd205d99405dae18cef21846dcc6a7f2704
         </div>
 
         <sub>All info and images are © The Pokemon Company and Nintendo</sub>
